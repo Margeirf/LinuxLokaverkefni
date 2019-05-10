@@ -302,32 +302,35 @@
     ```
     sudo nano /etc/samba/smb.conf
     ```
-    add temporary permissions to the folder
+    add permissions to the folder and change ownership of it
     ```
-    sudo chmod 777 /data/share
+    sudo chown root:GROUPNAME /data/share
+    sudo chmod 2775 /data/share
     ```
-    
     go down to the end of the configuration file and add the following
     
     ```
+    [global]
+    server string = %h # hostname
+    log file = /var/samba/smb-%h.log
+    max log size = 1000
+    disable netbios = yes # since this is a standalone server
+    server role = standalone server
+    veto files = /*.exe/ # whatever your want
+    delete veto files = yes
+     
     [share]
 
     path = /data/share/
-
     available = yes
-
-    valid users = USERNAME
-
-    read only = no
-
     browseable = yes
-
-    public = yes
-
-    writable = yes
+    guest only = no
+    guest ok = yes
+    read list = @GROUP1 @GROUP2 <- put all groups that can read here
+    write list = @GROUP3
+    force create mode = 0665
+    force directory mode = 2775
     ```
-    
-    keep note that this will make the folder writeable for all users that can access it
     
     now we need to restart the samba service for our changes to take effect
     

@@ -256,6 +256,10 @@
     ```
     
 5. Create user accounts
+    Just do this manually for each user with the following command, there is no need to create a script for this few users
     
-    
+    ```
+    adduser USERNAME
+    ```
+    you will now be prompted to enter all the related information for the user
     

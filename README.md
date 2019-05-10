@@ -214,6 +214,48 @@
     ```
     named-checkconf
     ```
+    These commands should have an output similar to this
+    
+    > zone margeir.local/IN: loaded serial 20
+    OK
+    
+    now you need to restart the dns server
+    ```
+    systemctl restart bind9
+    ```
+    enable the dns server on startup
+    ```
+    systemctl enable bind9
+    ```
+    check the status of the dns server
+    ```
+    systemctl status bind9
+    ```
+    
+    in order to verify that the dns server works you can now go to a client machine and add the new dns server ip address to **/etc/resolv.conf**
+    
+    ```
+    sudo nano /etc/resolv.conf
+    ```
+    
+    add and entry like this for your server
+    
+    ```
+    nameserver 192.168.100.1
+    ```
+    
+    now you can use the dig command to check the forward lookup zone
+    
+    ```
+    dig www.margeir.local
+    ```
+    
+    test the reverse lookup
+    ```
+    dig -x 192.168.100.1
+    ```
+    
+5. Create user accounts
     
     
     

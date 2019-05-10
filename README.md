@@ -259,7 +259,42 @@
     Just do this manually for each user with the following command, there is no need to create a script for this few users
     
     ```
-    adduser USERNAME
+    sudo adduser USERNAME
     ```
     you will now be prompted to enter all the related information for the user
+    
+    now we need to create the groups and add the relative users to their groups
+    
+    ```
+    sudo groupadd GROUPNAME
+    ```
+    add a user to this new group
+    ```
+    usermod -a -G GROUPNAME USERNAME
+    ```
+   
+   you can also add a user to a group as the user is created
+   ```
+   useradd -G GROUPNAME USERNAME
+   ```
+   but if the user is created this way the ui menu does not show up
+    
+6. Install and configure SAMBA
+
+    the first step is to install SAMBA
+    ```
+    sudo apt install samba -y
+    ```
+    
+    samba is kinda stupid in the regard that it has its own set of user accounts for access you will need to set a seperate samba password for the users with the following command
+    
+    ```
+    sudo smbpasswd -a USERNAME
+    ```
+    next you can make a shared folder be sure not to use sudo for creating this folder as then the owner of said folder will be the root user and samba wont be able to access it
+    
+    ```
+    mkdir /home/USERNAME/test
+    ```
+    
     

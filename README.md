@@ -291,10 +291,6 @@
     ```
     sudo smbpasswd -a USERNAME
     ```
-    next you can make a shared folder be sure not to use sudo for creating this folder as then the owner of said folder will be the root user and samba wont be able to access it
     
-    ```
-    mkdir /home/USERNAME/test
-    ```
     
     

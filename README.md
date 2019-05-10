@@ -144,7 +144,7 @@
     ; BIND data file for local loopback interface
     ;
     $TTL    604800
-    @       IN      SOA     192.168.100.1. root.margeir.local. (
+    @       IN      SOA     server1.margeir.local. root.margeir.local. (
                                  20         ; Serial
                              604800         ; Refresh
                               86400         ; Retry
@@ -156,9 +156,9 @@
     ;@      IN      AAAA    ::1
 
     ;Name Server Information
-           IN      NS      192.168.100.1.
+           IN      NS      server1.margeir.local.
     ;IP address of Name Server
-    ns1     IN      A       192.168.100.1.
+    server1     IN      A       192.168.100.1
     
     ;A - Record HostName To Ip Address
     www     IN       A      192.168.100.1

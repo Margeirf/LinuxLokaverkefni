@@ -292,5 +292,48 @@
     sudo smbpasswd -a USERNAME
     ```
     
+    now we need to create a shared folder lets make it in the /home directory
     
+    ```
+    mkdir /home/share
+    ```
+    
+    now we need to edit the SAMBA configuration 
+    ```
+    sudo nano /etc/samba/smb.conf
+    ```
+    go down to the end of the configuration file and add the following
+    
+    ```
+    [share]
+
+    path = /home/share/
+
+    available = yes
+
+    valid users = USERNAME
+
+    read only = no
+
+    browseable = yes
+
+    public = yes
+
+    writable = yes
+    ```
+    
+    keep note that this will make the folder writeable for all users that can access it
+    
+    now we need to restart the samba service for our changes to take effect
+    
+    ```
+    sudo /etc/init.d/smbd restart
+    ```
+    
+    now we can test our samba config file for syntax errors
+    
+    ```
+    sudo testparm
+    ```
+    now any client from your lan should be able to access the share with the correct credentials
     

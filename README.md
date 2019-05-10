@@ -115,4 +115,23 @@
     };
     ```
     
-    you can also create 
+    you can also create a reverse lookup zone
+    
+    ```
+    zone "100.168.129.in-addr.arpa" IN { // this should match your network in reverse order
+        type master;
+        file "/etc/bind/rev.margeir.local.db" //reverse lookup zone
+        allow-update { none; } //this is a primary dns so none is fine
+    };
+    ```
+    
+    Next we need to create a zone lookup file, we will start by copying the sample files to /etc/bind
+    
+    ```
+    cp /etc/bind/db.local /etc/bind/fwd.margeir.local.db
+    cp /etc/bind/db.local /etc/bind/rev.margeir.local.db
+    ```
+    
+    
+    
+    

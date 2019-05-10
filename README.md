@@ -175,5 +175,45 @@
         
     change the configuration for the reverse lookup zones
     
+    ```
+    sudo nano /etc/bind/rev.margeir.local.db
+    ```
+    
+    update your file with the content shown below and remember to update your serial number with a random intiger
+    
+    ```
+    ;
+    ; BIND reverse data file for local loopback interface
+    ;
+    $TTL    604800
+    @       IN      SOA     margeir.local. root.margeir.local. (
+                                 20         ; Serial
+                             604800         ; Refresh
+                              86400         ; Retry
+                            2419200         ; Expire
+                             604800 )       ; Negative Cache TTL
+    ;
+    ;@      IN      NS      localhost.
+    ;1.0.0  IN      PTR     localhost.
+
+    ;Name Server Information
+           IN      NS     192.168.100.1.
+    ;Reverse lookup for Name Server
+    10      IN      PTR    192.168.100.1.
+    ;PTR Record IP address to HostName
+    100     IN      PTR    www.margeir.local.
+    200     IN      PTR    margeir.local.
+    ```
+    
+    Now its time to check our configuration, use the following command to check for syntax errors in zone files
+    
+    ```
+    named-checkzone margeir.local /etc/bind/ <- name of zone file goes here // replace margeir.local with your domain
+    ```
+    check the named.conf file for syntac errors with the following command
+    ```
+    named-checkconf
+    ```
+    
     
     

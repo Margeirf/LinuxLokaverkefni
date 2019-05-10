@@ -14,7 +14,7 @@
         version: 2
         renderer: networkd
         ethernets:
-            ens5:
+            eth0:   -> the name of your 
                 dhcp4: no
                 addresses: [x.x.x.x/24] -> /24 is your netmask (dont type content after ->)
                 gateway4: x.x.x.x
@@ -66,7 +66,7 @@
     Uncomment the following line
     
     ```
-    #authorative;
+    #authoritative;
     ```
     
     Add the following to the end of the file
@@ -92,5 +92,27 @@
     ```
     
 4. Install and configure DNS
-
     
+    start by installing the dns server packages
+    
+    ```
+    sudo apt install -y bind9 bind9utils bind9-doc dnsutils
+    ```
+    
+    In order to create zones you need to edit the DNS server configuration file
+    
+    ```
+    sudo nano /etc/bind/named.conf.local
+    ```
+    
+    add an entry for a sample domain forward lookup zone
+    
+    ```
+    zone "margeir.local" IN {// <- replace with your domain name
+        type master; //This means that this is the Primary DNS server/master DNS server
+        file "/etc/bind/fwd.margeir.local.db"; //This is your Forward lookup file
+        allow-update { none; }; //This is a primary dns server so updates are not needed
+    };
+    ```
+    
+    you can also create 

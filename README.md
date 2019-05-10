@@ -295,19 +295,24 @@
     now we need to create a shared folder lets make it in the /home directory
     
     ```
-    mkdir /home/share
+    mkdir /data/share
     ```
     
     now we need to edit the SAMBA configuration 
     ```
     sudo nano /etc/samba/smb.conf
     ```
+    add temporary permissions to the folder
+    ```
+    sudo chmod 777 /data/share
+    ```
+    
     go down to the end of the configuration file and add the following
     
     ```
     [share]
 
-    path = /home/share/
+    path = /data/share/
 
     available = yes
 
@@ -336,4 +341,5 @@
     sudo testparm
     ```
     now any client from your lan should be able to access the share with the correct credentials
+    
     

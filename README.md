@@ -125,13 +125,55 @@
     };
     ```
     
-    Next we need to create a zone lookup file, we will start by copying the sample files to /etc/bind
+    Next we need to create a zone lookup file, we will start by copying the sample file to /etc/bind
     
     ```
     cp /etc/bind/db.local /etc/bind/fwd.margeir.local.db
-    cp /etc/bind/db.local /etc/bind/rev.margeir.local.db
     ```
     
+    edit the zone lookup file
+    
+    ```
+    sudo nano /etc/bind/fwd.margeir.local.db
+    ```
+    
+    Lets update the contents of said file, when you update these remember to change the serial number to a random intiger
+    
+    ```
+    ;
+    ; BIND data file for local loopback interface
+    ;
+    $TTL    604800
+    @       IN      SOA     192.168.100.1. root.margeir.local. (
+                                 20         ; Serial
+                             604800         ; Refresh
+                              86400         ; Retry
+                            2419200         ; Expire
+                             604800 )       ; Negative Cache TTL
+    ;
+    ;@      IN      NS      localhost.
+    ;@      IN      A       127.0.0.1
+    ;@      IN      AAAA    ::1
+
+    ;Name Server Information
+           IN      NS      192.168.100.1.
+    ;IP address of Name Server
+    ns1     IN      A       192.168.100.1.
+    
+    ;A - Record HostName To Ip Address
+    www     IN       A      192.168.100.1
+    @       IN       A      192.168.100.1
+    ;CNAME record
+    ftp     IN      CNAME   www.margeir.local.
+    ```
+    
+    cpoy the sample file for the reverse lookup zones
+    
+    ```
+    cp /etc/bind/db.127 /etc/bind/rev.margeir.local.db
+    ```
+        
+    change the configuration for the reverse lookup zones
     
     
     
